@@ -1,0 +1,15 @@
+{
+  "name": "guardian-patriot-final",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node init-db.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "twilio": "^5.3.3",
+    "dotenv": "^16.4.5",
+    "better-sqlite3": "^9.6.0"
+  }
+}
