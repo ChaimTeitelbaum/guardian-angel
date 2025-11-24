@@ -168,8 +168,22 @@ function app() {
     },
 
     speedDial(c) {
-      window.location.href = `tel:${c.phone}`;
-      this.showToast(`Calling ${c.name}`);
+      const link = this.getLocationLink();
+      const message = encodeURIComponent(
+        `URGENT — CALL ME NOW\nI'm in danger or need help immediately!\n\nMy location:\n${link}\n\n— Guardian Angel Auto-Alert`
+      );
+    
+      // Try WhatsApp first (opens with message ready to send)
+      window.location.href = `https://wa.me/${c.phone.replace(/[^\d+]/g, '')}?text=${message=${message}`;
+    
+      // Fallback to phone call if WhatsApp fails (iOS sometimes blocks wa.me)
+      setTimeout(() => {
+        if (document.hidden || !window.focus()) {
+          window.location.href = `tel:${c.phone}`;
+        }
+      }, 1000);
+    
+      this.showToast(`Alerting ${c.name} via WhatsApp...`);
     },
 
     async loadContacts() {
@@ -407,4 +421,5 @@ function app() {
     }
 
   } // end of return
+
 } // end of function app()
