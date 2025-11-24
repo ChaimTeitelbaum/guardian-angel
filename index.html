@@ -20,7 +20,7 @@
   <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-6">
 
     <div class="text-center mb-16">
-      <h1 class="font-orbitron text-7xl md:text-9xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-2xl">
+      <h1 class="font-orbitron text-5xl md:text-7xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-2xl">
         GUARDIAN ANGEL
       </h1>
       <p class="text-xl mt-6 opacity-80 tracking-widest" x-text="gpsStatus"></p>
@@ -49,7 +49,7 @@
     <!-- PANIC ORB -->
     <button @touchstart.prevent="startHold" @mousedown.prevent="startHold"
             @touchend.prevent="endHold" @mouseup="endHold" @mouseleave="endHold"
-            class="relative w-96 h-96 group">
+            class="relative w-80 h-80 group">
       <div class="absolute inset-0 rounded-full bg-gradient-to-br from-red-600/30 to-pink-700/30 blur-3xl group-active:blur-xl transition-all duration-500"></div>
       <div class="relative w-full h-full rounded-full bg-black/60 backdrop-blur-2xl border-4 border-red-500/60 shadow-2xl shadow-red-600/50 flex items-center justify-center overflow-hidden">
         <svg class="absolute inset-0 w-full h-full -rotate-90">
@@ -64,27 +64,27 @@
       </div>
     </button>
 
-    <p class="mt-12 text-2xl font-light tracking-widest" x-text="status"></p>
+    <p class="mt-16 text-3xl font-light tracking-widest" x-text="status"></p>
 
-    <!-- SPEED DIALS WITH PHOTOS + LABELS + 911 -->
-    <div class="absolute inset-x-0 bottom-8 flex flex-col items-center gap-6 z-40 px-8">
-      <div class="flex gap-10">
+    <!-- SPEED DIALS + 911 — Moved below "Ready" with margin -->
+    <div class="mt-20 flex flex-col items-center gap-8 z-40 px-8">
+      <div class="flex gap-12">
         <!-- 911 Button -->
         <div class="flex flex-col items-center">
-          <button @click="call911()" class="relative w-28 h-28 rounded-full bg-red-600/90 border-6 border-red-400 shadow-2xl shadow-red-600/80 hover:scale-110 transition-all duration-300 flex items-center justify-center backdrop-blur-xl">
+          <button @click="call911()" class="relative w-28 h-28 rounded-full bg-red-600/90 border-6 border-red-400 shadow-2xl hover:scale-110 transition-all backdrop-blur-xl">
             <div class="font-orbitron text-5xl font-black text-white drop-shadow-2xl">911</div>
             <div class="absolute inset-0 rounded-full bg-red-500/60 blur-xl animate-pulse"></div>
           </button>
           <p class="mt-3 text-sm font-bold text-red-400 tracking-wider">EMERGENCY</p>
         </div>
 
-        <!-- Guardians with Photos -->
+        <!-- Guardians -->
         <template x-for="c in contacts" :key="c.id">
           <div class="flex flex-col items-center">
             <button @click="speedDial(c)" 
-                    class="w-24 h-24 rounded-full overflow-hidden border-4 border-cyan-400/80 hover:border-cyan-300 hover:scale-110 transition-all duration-300 shadow-2xl backdrop-blur-xl ring-4 ring-cyan-500/30 hover:ring-cyan-400/60">
+                    class="w-24 h-24 rounded-full overflow-hidden border-4 border-cyan-400 hover:border-cyan-300 hover:scale-110 transition-all shadow-2xl backdrop-blur-xl">
               <img :src="c.photo || 'https://via.placeholder.com/96/1a0033/06f9d4?text=' + c.name.charAt(0)" 
-                   alt="photo" class="w-full h-full object-cover">
+                   class="w-full h-full object-cover">
             </button>
             <p class="mt-3 text-sm font-bold text-cyan-300 truncate w-24 text-center" x-text="c.name"></p>
           </div>
@@ -230,4 +230,5 @@
   </script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
+
 </html>
